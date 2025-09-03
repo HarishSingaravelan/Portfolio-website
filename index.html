@@ -140,10 +140,7 @@
                     </a>
                 </div>
             </div>
-            <!-- <div class="mt-8 md:mt-0 md:ml-12 animate-on-scroll" style="animation-delay: 0.6s;">
-                <img src="src/profile-pic.jpg" alt="Harish Singaravelan Profile" class="w-40 h-40 rounded-full border-4 border-slate-700 shadow-xl">
-            </div> -->
-        </header>
+            </header>
 
         <section id="about" class="mb-20">
             <h2 class="text-4xl font-bold text-white mb-6 border-b-2 section-divider pb-2 animate-on-scroll">About Me</h2>
@@ -363,7 +360,7 @@
                         '<strong>Consumes & Stores Data:</strong> A Kafka consumer reads messages from the topic and stores them in MySQL.'
                     ],
                     image: 'src/kafka-airflow.png',
-                    links: [{ icon: 'github', url: 'https://github.com/HarishSingaravelan/Streaming-with-Airflow-Kafka', text: 'GitHub Link' }]
+                    links: [{ icon: 'github', url: 'https://github.com/HarishSingaravelan/Streaming-Data-using-airflow-and-kafka', text: 'GitHub Link' }]
                 },
                 {
                     id: 'retail-analytics',
@@ -376,7 +373,7 @@
                         '<strong>Workflow Automation:</strong> Automated daily data processing tasks using Apache Airflow.'
                     ],
                     image: 'src/retail analytics.png',
-                    links: [{ icon: 'github', url: 'https://github.com/HarishSingaravelan/Retail-Analytics-ETL', text: 'GitHub Link' }]
+                    links: [{ icon: 'github', url: 'https://github.com/HarishSingaravelan/ETL-Pipeline-for-Retail-Analytics-Using-Apache-Spark-Airflow', text: 'GitHub Link' }]
                 },
                 {
                     id: 'agricultural-analysis',
@@ -442,7 +439,9 @@
                         <ul class="list-disc list-inside text-slate-300 space-y-2 text-sm mb-4">
                             ${descriptionList}
                         </ul>
-                        ${linksList}
+                        <div class="flex space-x-4">
+                            ${linksList}
+                        </div>
                     </div>
                 `;
             }
@@ -486,7 +485,6 @@
                         renderProjects(projectsData, 'all-projects');
                     } else {
                         const filteredProjects = projectsData.filter(project => {
-                            // Convert category name to match the target ID format (e.g., "Data Science" -> "data-science")
                             const categorySlug = project.category.replace(/\s+/g, '-').toLowerCase();
                             return targetId.startsWith(categorySlug);
                         });
