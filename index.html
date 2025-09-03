@@ -4,44 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harish Singaravelan | Portfolio</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Lucide Icons CDN for social and project links -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background: linear-gradient(135deg, #1f2937 0%, #0d0d0d 100%);
-            background-attachment: fixed;
-        }
-        /* Custom styling for icons to handle initial rendering */
-        .icon {
-            stroke-width: 2.5;
+        :root {
+            --primary-bg: #0F172A; /* Slate 900 */
+            --secondary-bg: #1E293B; /* Slate 800 */
+            --text-primary: #E2E8F0; /* Slate 200 */
+            --text-secondary: #94A3B8; /* Slate 400 */
+            --accent-blue: #3B82F6; /* Blue 500 */
+            --accent-blue-dark: #2563EB; /* Blue 600 */
         }
 
-        /* Keyframe animation for section titles */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Custom styling for icons to handle initial rendering */
+        .icon {
+            stroke-width: 2;
+        }
+
+        /* Card and Hover Effects */
+        .card {
+            background-color: var(--secondary-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05); /* Subtle border */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem; /* Adjusting border-radius */
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent-blue);
+        }
+
+        /* Project image styling with subtle overlay */
+        .project-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+        }
+
+        .project-image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
+            z-index: 1;
+        }
+
+        /* Section dividers */
+        .section-divider {
+            border-color: var(--accent-blue-dark);
         }
         
         /* Keyframe animation for a new scroll-triggered effect */
         @keyframes scrollFadeUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -50,121 +84,126 @@
         }
 
         /* Apply animations to elements */
-        .section-title {
-            animation: fadeInDown 1s ease-out forwards;
-        }
         .animate-on-scroll {
             opacity: 0;
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            transform: translateY(50px);
+            transform: translateY(20px);
         }
+        
         .animate-on-scroll.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Active button styling */
+        .project-btn.active-btn {
+            background-color: var(--accent-blue);
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        
+        .project-btn.active-btn:hover {
+            background-color: var(--accent-blue-dark);
+        }
+
+        .project-btn {
+            transition: all 0.3s ease;
+        }
+
     </style>
 </head>
 <body class="bg-gray-950 text-gray-300 antialiased leading-relaxed">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
-        <!-- Header Section: Name, Profile Image, and Contact Info -->
-        <header class="text-center md:text-left mb-12 flex flex-col items-center md:flex-row md:justify-between">
+        <header class="text-center md:text-left mb-16 flex flex-col items-center md:flex-row md:justify-between">
             <div>
-                <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-2 rounded-lg section-title">
+                <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-2 animate-on-scroll">
                     Harish Singaravelan
                 </h1>
-                <p class="text-xl md:text-2xl font-medium text-gray-400 mb-6 section-title" style="animation-delay: 0.2s;">Data Scientist & Full Stack Developer</p>
-                <div class="flex flex-col md:flex-row items-center md:justify-start space-y-3 md:space-y-0 md:space-x-8 text-gray-400 section-title" style="animation-delay: 0.4s;">
-                    <a href="https://www.linkedin.com/in/harish-singaravelan-b4b4b4b4" target="_blank" rel="noopener noreferrer" class="hover:text-blue-500 transition-colors duration-300 flex items-center space-x-2">
+                <p class="text-xl md:text-2xl font-medium text-slate-400 mb-6 animate-on-scroll" style="animation-delay: 0.2s;">Data Scientist & Full Stack Developer</p>
+                <div class="flex flex-col md:flex-row items-center md:justify-start space-y-3 md:space-y-0 md:space-x-8 text-slate-400 animate-on-scroll" style="animation-delay: 0.4s;">
+                    <a href="https://www.linkedin.com/in/harish-singaravelan-b4b4b4b4" target="_blank" rel="noopener noreferrer" class="hover:text-accent-blue transition-colors duration-300 flex items-center space-x-2">
                         <i class="icon" data-lucide="linkedin"></i>
                         <span>LinkedIn</span>
                     </a>
-                    <a href="https://github.com/harish-singaravelan" target="_blank" rel="noopener noreferrer" class="hover:text-purple-500 transition-colors duration-300 flex items-center space-x-2">
+                    <a href="https://github.com/harish-singaravelan" target="_blank" rel="noopener noreferrer" class="hover:text-accent-blue transition-colors duration-300 flex items-center space-x-2">
                         <i class="icon" data-lucide="github"></i>
                         <span>Github</span>
                     </a>
-                    <a href="mailto:harishsingaravelan990@gmail.com" class="hover:text-teal-500 transition-colors duration-300 flex items-center space-x-2">
+                    <a href="mailto:harishsingaravelan990@gmail.com" class="hover:text-accent-blue transition-colors duration-300 flex items-center space-x-2">
                         <i class="icon" data-lucide="mail"></i>
                         <span>harishsingaravelan990@gmail.com</span>
                     </a>
-                    <a href="tel:+15854398914" class="hover:text-orange-500 transition-colors duration-300 flex items-center space-x-2">
+                    <a href="tel:+15854398914" class="hover:text-accent-blue transition-colors duration-300 flex items-center space-x-2">
                         <i class="icon" data-lucide="phone"></i>
                         <span>+1 (585) 439-8914</span>
                     </a>
                 </div>
             </div>
-            <!-- Placeholder for Profile Image -->
-            <div class="mt-8 md:mt-0 md:ml-12 card">
-                <img src="https://placehold.co/150x150/111827/4b5563?text=Profile" alt="Harish Singaravelan Profile" class="w-40 h-40 rounded-full border-4 border-gray-700 shadow-lg">
-            </div>
+            <!-- <div class="mt-8 md:mt-0 md:ml-12 animate-on-scroll" style="animation-delay: 0.6s;">
+                <img src="src/profile-pic.jpg" alt="Harish Singaravelan Profile" class="w-40 h-40 rounded-full border-4 border-slate-700 shadow-xl">
+            </div> -->
         </header>
 
-        <!-- About Me Section -->
-        <section id="about" class="mb-16">
-            <h2 class="text-4xl font-bold text-white mb-6 border-b-2 border-orange-500 pb-2 section-title">About Me</h2>
-            <div class="bg-gray-800 p-8 rounded-2xl shadow-xl animate-on-scroll">
-                <!-- Shortened initial text -->
-                <p id="about-me-short" class="text-lg text-gray-300">
+        <section id="about" class="mb-20">
+            <h2 class="text-4xl font-bold text-white mb-6 border-b-2 section-divider pb-2 animate-on-scroll">About Me</h2>
+            <div class="card p-8 shadow-xl animate-on-scroll">
+                <p id="about-me-short" class="text-lg text-slate-300">
                     A highly motivated and results-driven Data Scientist and Full Stack Developer with a strong foundation in both machine learning and web technologies. I hold a Master's degree in Data Science from Rochester Institute of Technology and a Bachelor's in Computer Science and Engineering from Anna University.
                 </p>
-
-                <!-- Full text, hidden by default -->
                 <div id="about-me-full" class="hidden">
-                    <p class="text-lg text-gray-300 mt-4">
+                    <p class="text-lg text-slate-300 mt-4">
                         My expertise lies in building end-to-end data-driven solutions, from designing robust ETL pipelines with Apache Spark and Airflow to developing intelligent applications with LangChain and Streamlit. My projects, such as the Semantic Book Recommender System and Diabetics Analysis, Prediction and Deployment, demonstrate my ability to apply machine learning and data analysis techniques to solve real-world problems.
                     </p>
-                    <p class="text-lg text-gray-300 mt-4">
+                    <p class="text-lg text-slate-300 mt-4">
                         As a Full Stack Intern at Hyundai Motors, I developed RESTful APIs using Node.js and MongoDB, which significantly improved operational efficiency. I am proficient in a wide range of technologies, including Python, SQL, Docker, and Tableau, and I am passionate about leveraging my skills to create innovative solutions that drive business value.
                     </p>
                 </div>
-                
-                <!-- Toggle link -->
-                <a id="toggle-about" href="#!" class="text-sm font-semibold text-teal-400 hover:text-teal-300 mt-4 inline-block">
+                <a id="toggle-about" href="#!" class="text-sm font-semibold text-accent-blue hover:text-accent-blue-dark mt-4 inline-block transition-colors duration-300">
                     Show More
                 </a>
             </div>
         </section>
-
-        <!-- Technical Skills Section -->
-        <section id="skills" class="mb-16">
-            <h2 class="text-4xl font-bold text-white mb-6 border-b-2 border-orange-500 pb-2 section-title">Technical Skills</h2>
-            <div class="bg-gray-800 p-8 rounded-2xl shadow-xl animate-on-scroll">
+        
+        <section id="skills" class="mb-20">
+            <h2 class="text-4xl font-bold text-white mb-6 border-b-2 section-divider pb-2 animate-on-scroll">Technical Skills</h2>
+            <div class="card p-8 shadow-xl animate-on-scroll">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="card">
-                        <h3 class="text-xl font-semibold text-teal-300 mb-2">Languages</h3>
-                        <ul class="list-disc list-inside space-y-1 text-gray-300">
+                    <div class="card p-6">
+                        <h3 class="text-xl font-semibold text-accent-blue mb-2">Languages</h3>
+                        <ul class="list-disc list-inside space-y-1 text-slate-300">
                             <li>Python</li>
                             <li>Java</li>
                             <li>C++</li>
                             <li>SQL</li>
                         </ul>
                     </div>
-                    <div class="card" style="animation-delay: 0.2s;">
-                        <h3 class="text-xl font-semibold text-teal-300 mb-2">Web & Cloud</h3>
-                        <ul class="list-disc list-inside space-y-1 text-gray-300">
+                    <div class="card p-6">
+                        <h3 class="text-xl font-semibold text-accent-blue mb-2">Web & Cloud</h3>
+                        <ul class="list-disc list-inside space-y-1 text-slate-300">
                             <li>HTML, CSS, JavaScript</li>
                             <li>Flask, Node.js, Express.js</li>
                             <li>Docker, Kubernetes</li>
                         </ul>
                     </div>
-                    <div class="card" style="animation-delay: 0.3s;">
-                        <h3 class="text-xl font-semibold text-teal-300 mb-2">Frameworks & Tools</h3>
-                        <ul class="list-disc list-inside space-y-1 text-gray-300">
+                    <div class="card p-6">
+                        <h3 class="text-xl font-semibold text-accent-blue mb-2">Frameworks & Tools</h3>
+                        <ul class="list-disc list-inside space-y-1 text-slate-300">
                             <li>PyTorch, Scikit-learn, Pandas, NumPy</li>
                             <li>MongoDB, Git, GitHub, GitLab CI/CD</li>
                         </ul>
                     </div>
-                    <div class="card" style="animation-delay: 0.4s;">
-                        <h3 class="text-xl font-semibold text-teal-300 mb-2">Data & Analytics</h3>
-                        <ul class="list-disc list-inside space-y-1 text-gray-300">
+                    <div class="card p-6">
+                        <h3 class="text-xl font-semibold text-accent-blue mb-2">Data & Analytics</h3>
+                        <ul class="list-disc list-inside space-y-1 text-slate-300">
                             <li>MySQL, Apache Spark, PySpark</li>
                             <li>ETL/ELT</li>
                             <li>Tableau, Power BI, Excel</li>
                         </ul>
                     </div>
-                    <div class="card" style="animation-delay: 0.5s;">
-                        <h3 class="text-xl font-semibold text-teal-300 mb-2">Operating Systems</h3>
-                        <ul class="list-disc list-inside text-gray-300">
+                    <div class="card p-6">
+                        <h3 class="text-xl font-semibold text-accent-blue mb-2">Operating Systems</h3>
+                        <ul class="list-disc list-inside text-slate-300">
                             <li>Linux</li>
                         </ul>
                     </div>
@@ -172,295 +211,32 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="mb-16">
-            <h2 class="text-4xl font-bold text-white mb-6 border-b-2 border-orange-500 pb-2 section-title">Projects</h2>
+        <section id="projects" class="mb-20">
+            <h2 class="text-4xl font-bold text-white mb-6 border-b-2 section-divider pb-2 animate-on-scroll">Projects</h2>
             
-            <!-- Project Category Navigation -->
             <nav class="flex flex-wrap justify-center sm:justify-start gap-4 mb-8">
-                <button id="all-btn" data-target="all-projects" class="project-btn px-6 py-2 rounded-full font-semibold text-white bg-gray-700 hover:bg-gray-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-gray-900 active-btn">All</button>
-                <button id="ds-btn" data-target="data-science-projects" class="project-btn px-6 py-2 rounded-full font-semibold text-gray-400 hover:text-white hover:bg-gray-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-gray-900">Data Science</button>
-                <button id="de-btn" data-target="data-engineering-projects" class="project-btn px-6 py-2 rounded-full font-semibold text-gray-400 hover:text-white hover:bg-gray-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-gray-900">Data Engineering</button>
-                <button id="da-btn" data-target="data-analytics-projects" class="project-btn px-6 py-2 rounded-full font-semibold text-gray-400 hover:text-white hover:bg-gray-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 focus:ring-offset-gray-900">Data Analytics</button>
+                <button id="all-btn" data-target="all-projects" class="project-btn px-6 py-2 rounded-full font-semibold text-slate-400 hover:bg-slate-700 active-btn">All</button>
+                <button id="ds-btn" data-target="data-science-projects" class="project-btn px-6 py-2 rounded-full font-semibold text-slate-400 hover:bg-slate-700">Data Science</button>
+                <button id="de-btn" data-target="data-engineering-projects" class="project-btn px-6 py-2 rounded-full font-semibold text-slate-400 hover:bg-slate-700">Data Engineering</button>
+                <button id="da-btn" data-target="data-analytics-projects" class="project-btn px-6 py-2 rounded-full font-semibold text-slate-400 hover:bg-slate-700">Data Analytics</button>
             </nav>
 
             <div class="space-y-12 animate-on-scroll">
-                <!-- All Projects Section (Displayed by default) -->
-                <div id="all-projects" class="project-section space-y-12">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Project 1: Semantic Book Recommender -->
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-purple-500 hover:scale-105 transition-all duration-300 card">
-                            <img src="src/webpage.png" alt="Books searching gif" class="w-full rounded-xl mb-4" />
-                            <h4 class="text-2xl font-semibold text-white mb-2">Semantic Book Recommender System 📚</h4>
-                            <p class="text-sm font-light text-gray-400 mb-4">Gradio, LangChain, ChromaDB, Hugging Face</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                                <li><strong>Text Processing & Semantic Search:</strong> Developed a book recommendation system using Hugging Face embeddings, processing content descriptions, categories, and emotional tones for accurate suggestions.</li>
-                                <li><strong>Database Optimization & Search Efficiency:</strong> Implemented ChromaDB for efficient semantic search and optimized data chunking and database queries to ensure scalability and performance.</li>
-                                <li><strong>User Interface Design:</strong> Created an intuitive Gradio dashboard that allows users to filter book recommendations by category and emotional tone.</li>
-                            </ul>
-                            <a href="https://github.com/HarishSingaravelan" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-500 transition-colors duration-300 flex items-center space-x-2">
-                                <i class="icon" data-lucide="github"></i>
-                                <span>GitHub Link</span>
-                            </a>
-                        </div>
-                        <!-- Project 2: Diabetics Analysis, Prediction and Deployment -->
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-red-500 hover:scale-105 transition-all duration-300 card" style="animation-delay: 0.2s;">
-                            <img src="src/diabetics.png" alt="Medical data analysis gif" class="w-full rounded-xl mb-4" />
-                            <h4 class="text-2xl font-semibold text-white mb-2">Diabetics Analysis, Prediction & Deployment</h4>
-                            <p class="text-sm font-light text-gray-400 mb-4">Sklearn, Pandas, Numpy, Flask</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                                <li><strong>Data Analysis & Optimization:</strong> Analyzed diabetes dataset and optimized multiple classifiers (Hist Gradient Boosting, Logistic Regression, Random Forest, KNN) using a pipeline and grid search.</li>
-                                <li><strong>Prediction & Deployment:</strong> Achieved an F1 score of 82% for predicting diabetes and deployed the model in a Flask server.</li>
-                            </ul>
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-red-400 hover:text-red-500 transition-colors duration-300 flex items-center space-x-2">
-                                <i class="icon" data-lucide="link"></i>
-                                <span>Project Link</span>
-                            </a>
-                        </div>
-                        <!-- New Project: DocuPal - PDF Chat QA -->
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-indigo-500 hover:scale-105 transition-all duration-300 card" style="animation-delay: 0.4s;">
-                            <img src="src/ui.gif" alt="Chatbot analyzing document gif" class="w-full rounded-xl mb-4" />
-                            <h4 class="text-2xl font-semibold text-white mb-2">DocuPal - PDF Chat QA</h4>
-                            <p class="text-sm font-light text-gray-400 mb-4">Ollama, LangChain, ChromaDB, Streamlit</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                                <li><strong>PDF Processing & Indexing:</strong> Uploadable PDF files are parsed with PyMuPDF, text is chunked and embedded using Ollama embeddings, and stored in ChromaDB for fast semantic search.</li>
-                                <li><strong>RAG Workflow:</strong> Questions are embedded and matched against PDF chunks via ChromaDB; retrieved content is used as context for Ollama’s LLM to generate accurate, grounded answers.</li>
-                                <li><strong>Dockerized Web App:</strong> A Streamlit front-end provides an intuitive chat interface. The application is containerized with Docker, enabling seamless local or cloud deployment.</li>
-                            </ul>
-                            <a href="https://github.com/HarishSingaravelan/DocuPal" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-500 transition-colors duration-300 flex items-center space-x-2">
-                                <i class="icon" data-lucide="github"></i>
-                                <span>GitHub Link</span>
-                            </a>
-                        </div>
-                        <!-- Project 3: Streaming with Airflow & Kafka -->
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-yellow-500 hover:scale-105 transition-all duration-300 card" style="animation-delay: 0.6s;">
-                            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2Q3enZ6dG5hNGg0c3JtMXRjYjZlMmcwN2w5dWU1M2J3NzkwcWcxZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/T237g1X8fI2d2d85nS/giphy.gif" alt="Data streaming pipeline gif" class="w-full rounded-xl mb-4" />
-                            <h4 class="text-2xl font-semibold text-white mb-2">Streaming with Airflow & Kafka</h4>
-                            <p class="text-sm font-light text-gray-400 mb-4">Kafka, Airflow, Docker, MySQL</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                                <li><strong>Schedules Data Fetching:</strong> An Airflow DAG triggers a task that calls the randomuser.me API to generate fake user data at regular intervals.</li>
-                                <li><strong>Streams Data to Kafka:</strong> Fetched user data is sent to a Kafka topic, acting as a real-time message queue.</li>
-                                <li><strong>Consumes & Stores Data:</strong> A Kafka consumer reads messages from the topic and stores them in MySQL.</li>
-                            </ul>
-                            <a href="https://github.com/HarishSingaravelan/Streaming-with-Airflow-Kafka" target="_blank" rel="noopener noreferrer" class="text-yellow-400 hover:text-yellow-500 transition-colors duration-300 flex items-center space-x-2">
-                                <i class="icon" data-lucide="github"></i>
-                                <span>GitHub Link</span>
-                            </a>
-                        </div>
-                        <!-- Project 4: ETL Pipeline for Retail Analytics -->
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-orange-500 hover:scale-105 transition-all duration-300 card" style="animation-delay: 0.8s;">
-                            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDVqbmZ5Z254NmVmd3N1em1kdW96dWFzcjA4amc1c2s1MWx4eDh3NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1x01a4w93LwXyWc233/giphy.gif" alt="Shopping cart data gif" class="w-full rounded-xl mb-4" />
-                            <h4 class="text-2xl font-semibold text-white mb-2">ETL Pipeline for Retail Analytics</h4>
-                            <p class="text-sm font-light text-gray-400 mb-4">Apache Spark, Apache Airflow, MongoDB, MySQL</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                                <li><strong>ETL & Data Integration:</strong> Designed and implemented an ETL pipeline for large-scale retail transactions from multiple sources.</li>
-                                <li><strong>Batch Processing & Optimization:</strong> Developed a Spark-based workflow to optimize inventory tracking, sales forecasting, and order management.</li>
-                                <li><strong>Workflow Automation:</strong> Automated daily data processing tasks using Apache Airflow.</li>
-                            </ul>
-                            <a href="https://github.com/HarishSingaravelan/Retail-Analytics-ETL" target="_blank" rel="noopener noreferrer" class="text-orange-400 hover:text-orange-500 transition-colors duration-300 flex items-center space-x-2">
-                                <i class="icon" data-lucide="github"></i>
-                                <span>GitHub Link</span>
-                            </a>
-                        </div>
-                        <!-- Project 5: Global Agricultural Production Analysis & Visualization -->
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-blue-500 hover:scale-105 transition-all duration-300 card" style="animation-delay: 1s;">
-                            <img src="src/agriculture.png" alt="World map with agricultural data gif" class="w-full rounded-xl mb-4" />
-                            <h4 class="text-2xl font-semibold text-white mb-2">Global Agricultural Production Analysis & Visualization</h4>
-                            <p class="text-sm font-light text-gray-400 mb-4">Tableau</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                                <li><strong>Data Visualization & Dashboarding:</strong> Designed an interactive Tableau dashboard to analyze global agricultural production trends from 1960 to 2021.</li>
-                                <li><strong>Data Integration & Transformation:</strong> Processed and normalized agricultural production data from multiple sources to ensure consistency.</li>
-                                <li><strong>Interactive Filtering & Insights:</strong> Implemented dynamic filters for farm produce and countries, allowing users to gain granular insights.</li>
-                            </ul>
-                            <a href="https://public.tableau.com/app/profile/harish.singaravelan/viz/Book1_17436107066220/Dashboard1" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-500 transition-colors duration-300 flex items-center space-x-2">
-                                <i class="icon" data-lucide="link"></i>
-                                <span>Project Link</span>
-                            </a>
-                        </div>
-                        <!-- Project 6: Loan Approval Analysis using SQL -->
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-teal-500 hover:scale-105 transition-all duration-300 card" style="animation-delay: 1.2s;">
-                            <img src="src/loan.png" alt="Financial analysis gif" class="w-full rounded-xl mb-4" />
-                            <h4 class="text-2xl font-semibold text-white mb-2">Loan Approval Analysis using SQL</h4>
-                            <p class="text-sm font-light text-gray-400 mb-4">SQL</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                                <li><strong>Data Exploration:</strong> Performed data exploration using SQL queries to examine loan data structure and contents.</li>
-                                <li><strong>Statistical Analysis:</strong> Analyzed loan approval rates based on key factors like credit history and marital status.</li>
-                                <li><strong>Financial Metrics:</strong> Calculated key financial metrics, including average loan amount and loan amount frequency.</li>
-                                <li><strong>Approval Percentage:</strong> Determined the total count and percentage of approved loans within the dataset.</li>
-                            </ul>
-                            <a href="https://github.com/HarishSingaravelan/Loan-Approval-Analysis-using-SQL" target="_blank" rel="noopener noreferrer" class="text-teal-400 hover:text-teal-500 transition-colors duration-300 flex items-center space-x-2">
-                                <i class="icon" data-lucide="github"></i>
-                                <span>GitHub Link</span>
-                            </a>
-                        </div>
-                        <!-- New Project: COVID-19 EDA using SQL -->
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-green-500 hover:scale-105 transition-all duration-300 card" style="animation-delay: 1.4s;">
-                            <img src="src/covid.png" alt="Medical virus data gif" class="w-full rounded-xl mb-4" />
-                            <h4 class="text-2xl font-semibold text-white mb-2">COVID-19 EDA using SQL</h4>
-                            <p class="text-sm font-light text-gray-400 mb-4">SQL</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                                <li><strong>Data Exploration:</strong> Explored COVID-19 data to analyze total cases, total deaths, and population by location and date.</li>
-                                <li><strong>Death & Infection Rates:</strong> Calculated the percentage of total deaths per total cases and the percentage of infected people per population.</li>
-                                <li><strong>Global Analysis:</strong> Analyzed death counts and infection rates by country and continent to identify key trends.</li>
-                                <li><strong>Vaccination Tracking:</strong> Tracked the rolling total of vaccinated people by location.</li>
-                            </ul>
-                            <a href="https://github.com/HarishSingaravelan/COVID-EDA-using-SQL" target="_blank" rel="noopener noreferrer" class="text-green-400 hover:text-green-500 transition-colors duration-300 flex items-center space-x-2">
-                                <i class="icon" data-lucide="github"></i>
-                                <span>GitHub Link</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Data Science Projects Section (Hidden by default) -->
-                <div id="data-science-projects" class="project-section space-y-12 hidden">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Project 1: Semantic Book Recommender -->
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-purple-500 hover:scale-105 transition-all duration-300 card">
-                            <img src="src/webpage.png" alt="Books searching gif" class="w-full rounded-xl mb-4" />
-                            <h4 class="text-2xl font-semibold text-white mb-2">Semantic Book Recommender System 📚</h4>
-                            <p class="text-sm font-light text-gray-400 mb-4">Gradio, LangChain, ChromaDB, Hugging Face</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                                <li><strong>Text Processing & Semantic Search:</strong> Developed a book recommendation system using Hugging Face embeddings, processing content descriptions, categories, and emotional tones for accurate suggestions.</li>
-                                <li><strong>Database Optimization & Search Efficiency:</strong> Implemented ChromaDB for efficient semantic search and optimized data chunking and database queries to ensure scalability and performance.</li>
-                            </ul>
-                            <a href="https://github.com/HarishSingaravelan" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-500 transition-colors duration-300 flex items-center space-x-2">
-                                <i class="icon" data-lucide="github"></i>
-                                <span>GitHub Link</span>
-                            </a>
-                        </div>
-                        <!-- Project 2: Diabetics Analysis, Prediction and Deployment -->
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-red-500 hover:scale-105 transition-all duration-300 card" style="animation-delay: 0.2s;">
-                            <img src="src/diabetics.png" alt="Medical data analysis gif" class="w-full rounded-xl mb-4" />
-                            <h4 class="text-2xl font-semibold text-white mb-2">Diabetics Analysis, Prediction & Deployment</h4>
-                            <p class="text-sm font-light text-gray-400 mb-4">Sklearn, Pandas, Numpy, Flask</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                                <li><strong>Data Analysis & Optimization:</strong> Analyzed diabetes dataset and optimized multiple classifiers (Hist Gradient Boosting, Logistic Regression, Random Forest, KNN) using a pipeline and grid search.</li>
-                                <li><strong>Prediction & Deployment:</strong> Achieved an F1 score of 82% for predicting diabetes and deployed the model in a Flask server.</li>
-                            </ul>
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-red-400 hover:text-red-500 transition-colors duration-300 flex items-center space-x-2">
-                                <i class="icon" data-lucide="link"></i>
-                                <span>Project Link</span>
-                            </a>
-                        </div>
-                        <!-- New Project: DocuPal - PDF Chat QA -->
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-indigo-500 hover:scale-105 transition-all duration-300 card" style="animation-delay: 0.4s;">
-                            <img src="src/ui.gif" alt="Chatbot analyzing document gif" class="w-full rounded-xl mb-4" />
-                            <h4 class="text-2xl font-semibold text-white mb-2">DocuPal - PDF Chat QA</h4>
-                            <p class="text-sm font-light text-gray-400 mb-4">Ollama, LangChain, ChromaDB, Streamlit</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                                <li><strong>PDF Processing & Indexing:</strong> Uploadable PDF files are parsed with PyMuPDF, text is chunked and embedded using Ollama embeddings, and stored in ChromaDB for fast semantic search.</li>
-                                <li><strong>RAG Workflow:</strong> Questions are embedded and matched against PDF chunks via ChromaDB; retrieved content is used as context for Ollama’s LLM to generate accurate, grounded answers.</li>
-                                <li><strong>Dockerized Web App:</strong> A Streamlit front-end provides an intuitive chat interface. The application is containerized with Docker, enabling seamless local or cloud deployment.</li>
-                            </ul>
-                            <a href="https://github.com/HarishSingaravelan/DocuPal" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-500 transition-colors duration-300 flex items-center space-x-2">
-                                <i class="icon" data-lucide="github"></i>
-                                <span>GitHub Link</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Data Engineering Projects Section (Hidden by default) -->
-                <div id="data-engineering-projects" class="project-section space-y-12 hidden">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Project 3: Streaming with Airflow & Kafka -->
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-yellow-500 hover:scale-105 transition-all duration-300 card">
-                            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2Q3enZ6dG5hNGg0c3JtMXRjYjZlMmcwN2w5dWU1M2J3NzkwcWcxZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/T237g1X8fI2d2d85nS/giphy.gif" alt="Data streaming pipeline gif" class="w-full rounded-xl mb-4" />
-                            <h4 class="text-2xl font-semibold text-white mb-2">Streaming with Airflow & Kafka</h4>
-                            <p class="text-sm font-light text-gray-400 mb-4">Kafka, Airflow, Docker, MySQL</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                                <li><strong>Schedules Data Fetching:</strong> An Airflow DAG triggers a task that calls the randomuser.me API to generate fake user data at regular intervals.</li>
-                                <li><strong>Streams Data to Kafka:</strong> Fetched user data is sent to a Kafka topic, acting as a real-time message queue.</li>
-                                <li><strong>Consumes & Stores Data:</strong> A Kafka consumer reads messages from the topic and stores them in MySQL.</li>
-                            </ul>
-                            <a href="https://github.com/HarishSingaravelan/Streaming-with-Airflow-Kafka" target="_blank" rel="noopener noreferrer" class="text-yellow-400 hover:text-yellow-500 transition-colors duration-300 flex items-center space-x-2">
-                                <i class="icon" data-lucide="github"></i>
-                                <span>GitHub Link</span>
-                            </a>
-                        </div>
-                        <!-- Project 4: ETL Pipeline for Retail Analytics -->
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-orange-500 hover:scale-105 transition-all duration-300 card" style="animation-delay: 0.2s;">
-                            <img src="src/retail analytics.png" alt="Shopping cart data gif" class="w-full rounded-xl mb-4" />
-                            <h4 class="text-2xl font-semibold text-white mb-2">ETL Pipeline for Retail Analytics</h4>
-                            <p class="text-sm font-light text-gray-400 mb-4">Apache Spark, Apache Airflow, MongoDB, MySQL</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                                <li><strong>ETL & Data Integration:</strong> Designed and implemented an ETL pipeline for large-scale retail transactions from multiple sources.</li>
-                                <li><strong>Batch Processing & Optimization:</strong> Developed a Spark-based workflow to optimize inventory tracking, sales forecasting, and order management.</li>
-                                <li><strong>Workflow Automation:</strong> Automated daily data processing tasks using Apache Airflow.</li>
-                            </ul>
-                            <a href="https://github.com/HarishSingaravelan/Retail-Analytics-ETL" target="_blank" rel="noopener noreferrer" class="text-orange-400 hover:text-orange-500 transition-colors duration-300 flex items-center space-x-2">
-                                <i class="icon" data-lucide="github"></i>
-                                <span>GitHub Link</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Data Analytics Projects Section (Hidden by default) -->
-                <div id="data-analytics-projects" class="project-section space-y-12 hidden">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Project 5: Global Agricultural Production Analysis & Visualization -->
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-blue-500 hover:scale-105 transition-all duration-300 card">
-                            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmtoc3ZpazJrbXhveDRyeXJucjdxYXJ6eGdtY2J6NG1icnBsdDRkbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0MylF6O949fG4uSA/giphy.gif" alt="World map with agricultural data gif" class="w-full rounded-xl mb-4" />
-                            <h4 class="text-2xl font-semibold text-white mb-2">Global Agricultural Production Analysis & Visualization</h4>
-                            <p class="text-sm font-light text-gray-400 mb-4">Tableau</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                                <li><strong>Data Visualization & Dashboarding:</strong> Designed an interactive Tableau dashboard to analyze global agricultural production trends from 1960 to 2021.</li>
-                                <li><strong>Data Integration & Transformation:</strong> Processed and normalized agricultural production data from multiple sources to ensure consistency.</li>
-                                <li><strong>Interactive Filtering & Insights:</strong> Implemented dynamic filters for farm produce and countries, allowing users to gain granular insights.</li>
-                            </ul>
-                            <a href="https://public.tableau.com/app/profile/harish.singaravelan/viz/Book1_17436107066220/Dashboard1" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-500 transition-colors duration-300 flex items-center space-x-2">
-                                <i class="icon" data-lucide="link"></i>
-                                <span>Project Link</span>
-                            </a>
-                        </div>
-                        <!-- Project 6: Loan Approval Analysis using SQL -->
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-teal-500 hover:scale-105 transition-all duration-300 card" style="animation-delay: 0.2s;">
-                            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXV6azg0cGxmcjVsdzRzcjQ1ZHV2OWE3c2p4emZ0Z2gyMG16Z3NlMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l2SpPj2X83Xn8bQ7S/giphy.gif" alt="Financial analysis gif" class="w-full rounded-xl mb-4" />
-                            <h4 class="text-2xl font-semibold text-white mb-2">Loan Approval Analysis using SQL</h4>
-                            <p class="text-sm font-light text-gray-400 mb-4">SQL</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                                <li><strong>Data Exploration:</strong> Performed data exploration using SQL queries to examine loan data structure and contents.</li>
-                                <li><strong>Statistical Analysis:</strong> Analyzed loan approval rates based on key factors like credit history and marital status.</li>
-                                <li><strong>Financial Metrics:</strong> Calculated key financial metrics, including average loan amount and loan amount frequency.</li>
-                                <li><strong>Approval Percentage:</strong> Determined the total count and percentage of approved loans within the dataset.</li>
-                            </ul>
-                            <a href="https://github.com/HarishSingaravelan/Loan-Approval-Analysis-using-SQL" target="_blank" rel="noopener noreferrer" class="text-teal-400 hover:text-teal-500 transition-colors duration-300 flex items-center space-x-2">
-                                <i class="icon" data-lucide="github"></i>
-                                <span>GitHub Link</span>
-                            </a>
-                        </div>
-                        <!-- New Project: COVID-19 EDA using SQL -->
-                        <div class="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 hover:border-green-500 hover:scale-105 transition-all duration-300 card" style="animation-delay: 0.4s;">
-                            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXg0enZidTN3d3R6aXJydnBldDhrZW42Z2d2NnFxYnJ6c2J0aW9uYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/d1zT1u5f9B65j2o/giphy.gif" alt="Medical virus data gif" class="w-full rounded-xl mb-4" />
-                            <h4 class="text-2xl font-semibold text-white mb-2">COVID-19 EDA using SQL</h4>
-                            <p class="text-sm font-light text-gray-400 mb-4">SQL</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                                <li><strong>Data Exploration:</strong> Explored COVID-19 data to analyze total cases, total deaths, and population by location and date.</li>
-                                <li><strong>Death & Infection Rates:</strong> Calculated the percentage of total deaths per total cases and the percentage of infected people per population.</li>
-                                <li><strong>Global Analysis:</strong> Analyzed death counts and infection rates by country and continent to identify key trends.</li>
-                                <li><strong>Vaccination Tracking:</strong> Tracked the rolling total of vaccinated people by location.</li>
-                            </ul>
-                            <a href="https://github.com/HarishSingaravelan/COVID-EDA-using-SQL" target="_blank" rel="noopener noreferrer" class="text-green-400 hover:text-green-500 transition-colors duration-300 flex items-center space-x-2">
-                                <i class="icon" data-lucide="github"></i>
-                                <span>GitHub Link</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <div id="all-projects" class="project-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+                <div id="data-science-projects" class="project-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden"></div>
+                <div id="data-engineering-projects" class="project-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden"></div>
+                <div id="data-analytics-projects" class="project-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden"></div>
             </div>
         </section>
 
-        <!-- Experience Section -->
-        <section id="experience" class="mb-16">
-            <h2 class="text-4xl font-bold text-white mb-6 border-b-2 border-orange-500 pb-2 section-title">Experience</h2>
-            <div class="bg-gray-800 p-8 rounded-2xl shadow-xl animate-on-scroll">
+        <section id="experience" class="mb-20">
+            <h2 class="text-4xl font-bold text-white mb-6 border-b-2 section-divider pb-2 animate-on-scroll">Experience</h2>
+            <div class="card p-8 shadow-xl animate-on-scroll">
                 <div class="flex flex-col md:flex-row justify-between mb-4">
                     <h3 class="text-2xl font-semibold text-white">Full Stack Intern at Hyundai Motors</h3>
-                    <span class="text-lg text-gray-400">Feb 2023 | Chennai, India</span>
+                    <span class="text-lg text-slate-400">Feb 2023 | Chennai, India</span>
                 </div>
-                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                <ul class="list-disc list-inside text-slate-300 space-y-2">
                     <li>Developed RESTful APIs using Node.js and MongoDB to power the internal spare parts inventory portal.</li>
                     <li>Enabled the inventory team to check real-time availability of 1,000+ spare parts across multiple locations.</li>
                     <li>Reduced manual lookup time by 70% and minimized errors in stock tracking.</li>
@@ -468,36 +244,33 @@
             </div>
         </section>
 
-        <!-- Education Section -->
-        <section id="education" class="mb-16">
-            <h2 class="text-4xl font-bold text-white mb-6 border-b-2 border-orange-500 pb-2 section-title">Education</h2>
+        <section id="education" class="mb-20">
+            <h2 class="text-4xl font-bold text-white mb-6 border-b-2 section-divider pb-2 animate-on-scroll">Education</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 animate-on-scroll">
-                <!-- Education 1: RIT -->
-                <div class="bg-gray-800 p-8 rounded-2xl shadow-xl card">
+                <div class="card p-8 shadow-xl">
                     <div class="flex justify-between items-start mb-2">
                         <h3 class="text-2xl font-semibold text-white">Rochester Institute of Technology</h3>
-                        <span class="text-lg text-gray-400">2024-2026</span>
+                        <span class="text-lg text-slate-400">2024-2026</span>
                     </div>
-                    <p class="text-lg text-gray-300">M.S., Data Science</p>
-                    <p class="text-sm text-gray-400 mb-2">GPA: 3.94/4.0</p>
-                    <p class="text-gray-300 font-medium">Relevant Coursework:</p>
-                    <ul class="list-disc list-inside text-sm text-gray-400">
+                    <p class="text-lg text-slate-300">M.S., Data Science</p>
+                    <p class="text-sm text-slate-400 mb-2">GPA: 3.94/4.0</p>
+                    <p class="text-slate-300 font-medium">Relevant Coursework:</p>
+                    <ul class="list-disc list-inside text-sm text-slate-400">
                         <li>Data Science and Data Analytics</li>
                         <li>Applied Statistics</li>
                         <li>Neural Networks</li>
                         <li>Software Construction</li>
                     </ul>
                 </div>
-                <!-- Education 2: Anna University -->
-                <div class="bg-gray-800 p-8 rounded-2xl shadow-xl card" style="animation-delay: 0.2s;">
+                <div class="card p-8 shadow-xl">
                     <div class="flex justify-between items-start mb-2">
                         <h3 class="text-2xl font-semibold text-white">Anna University</h3>
-                        <span class="text-lg text-gray-400">2020-2024</span>
+                        <span class="text-lg text-slate-400">2020-2024</span>
                     </div>
-                    <p class="text-lg text-gray-300">B.E., Computer Science and Engineering</p>
-                    <p class="text-sm text-gray-400 mb-2">GPA: 8.5/10</p>
-                    <p class="text-gray-300 font-medium">Relevant Coursework:</p>
-                    <ul class="list-disc list-inside text-sm text-gray-400">
+                    <p class="text-lg text-slate-300">B.E., Computer Science and Engineering</p>
+                    <p class="text-sm text-slate-400 mb-2">GPA: 8.5/10</p>
+                    <p class="text-slate-300 font-medium">Relevant Coursework:</p>
+                    <ul class="list-disc list-inside text-sm text-slate-400">
                         <li>Artificial Intelligence</li>
                         <li>DBMS</li>
                         <li>Data Structures & Algorithms</li>
@@ -506,21 +279,20 @@
             </div>
         </section>
         
-        <!-- Achievements Section -->
-        <section id="achievements" class="mb-16">
-            <h2 class="text-4xl font-bold text-white mb-6 border-b-2 border-orange-500 pb-2 section-title">Achievements</h2>
-            <div class="bg-gray-800 p-8 rounded-2xl shadow-xl animate-on-scroll">
+        <section id="achievements" class="mb-20">
+            <h2 class="text-4xl font-bold text-white mb-6 border-b-2 section-divider pb-2 animate-on-scroll">Achievements</h2>
+            <div class="card p-8 shadow-xl animate-on-scroll">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="card">
+                    <div class="card p-6">
                         <h3 class="text-xl font-semibold text-white mb-2">Certifications</h3>
-                        <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
                             <li>Microsoft AI-900 (Azure AI Fundamentals)</li>
                             <li>IBM Data Science</li>
                         </ul>
                     </div>
-                    <div class="card" style="animation-delay: 0.2s;">
+                    <div class="card p-6">
                         <h3 class="text-xl font-semibold text-white mb-2">Awards</h3>
-                        <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
                             <li>Winner, Smart India Hackathon (AICTE)</li>
                             <li>Runner-Up, Web Designing Competition</li>
                         </ul>
@@ -529,25 +301,164 @@
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="text-center text-gray-500 text-sm mt-16">
+        <footer class="text-center text-slate-500 text-sm mt-16">
             <p>&copy; <script>document.write(new Date().getFullYear())</script> Harish Singaravelan. All Rights Reserved.</p>
         </footer>
 
     </div>
 
-    <!-- Initialize Lucide icons -->
     <script>
         lucide.createIcons();
     </script>
 
-    <!-- JavaScript for project category switching and about me toggle -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const projectsData = [
+                {
+                    id: 'book-recommender',
+                    title: 'Semantic Book Recommender System 📚',
+                    category: 'Data Science',
+                    tech: 'Gradio, LangChain, ChromaDB, Hugging Face',
+                    description: [
+                        '<strong>Text Processing & Semantic Search:</strong> Developed a book recommendation system using Hugging Face embeddings...',
+                        '<strong>Database Optimization:</strong> Implemented ChromaDB for efficient semantic search and optimized data chunking...',
+                        '<strong>User Interface Design:</strong> Created an intuitive Gradio dashboard that allows users to filter book recommendations...'
+                    ],
+                    image: 'src/webpage.png',
+                    links: [{ icon: 'github', url: 'https://github.com/HarishSingaravelan', text: 'GitHub Link' }]
+                },
+                {
+                    id: 'diabetics-prediction',
+                    title: 'Diabetics Analysis, Prediction & Deployment',
+                    category: 'Data Science',
+                    tech: 'Sklearn, Pandas, Numpy, Flask',
+                    description: [
+                        '<strong>Data Analysis & Optimization:</strong> Analyzed diabetes dataset and optimized multiple classifiers...',
+                        '<strong>Prediction & Deployment:</strong> Achieved an F1 score of 82% for predicting diabetes and deployed the model...'
+                    ],
+                    image: 'src/diabetics.png',
+                    links: [{ icon: 'link', url: '#', text: 'Project Link' }]
+                },
+                {
+                    id: 'docupal',
+                    title: 'DocuPal - PDF Chat QA',
+                    category: 'Data Science',
+                    tech: 'Ollama, LangChain, ChromaDB, Streamlit',
+                    description: [
+                        '<strong>PDF Processing & Indexing:</strong> Uploadable PDF files are parsed with PyMuPDF, text is chunked and embedded...',
+                        '<strong>RAG Workflow:</strong> Questions are embedded and matched against PDF chunks via ChromaDB; retrieved content is used as context...',
+                        '<strong>Dockerized Web App:</strong> A Streamlit front-end provides an intuitive chat interface...'
+                    ],
+                    image: 'src/ui.gif',
+                    links: [{ icon: 'github', url: 'https://github.com/HarishSingaravelan/DocuPal', text: 'GitHub Link' }]
+                },
+                {
+                    id: 'airflow-kafka',
+                    title: 'Streaming with Airflow & Kafka',
+                    category: 'Data Engineering',
+                    tech: 'Kafka, Airflow, Docker, MySQL',
+                    description: [
+                        '<strong>Schedules Data Fetching:</strong> An Airflow DAG triggers a task that calls the randomuser.me API...',
+                        '<strong>Streams Data to Kafka:</strong> Fetched user data is sent to a Kafka topic, acting as a real-time message queue...',
+                        '<strong>Consumes & Stores Data:</strong> A Kafka consumer reads messages from the topic and stores them in MySQL.'
+                    ],
+                    image: 'src/kafka-airflow.png',
+                    links: [{ icon: 'github', url: 'https://github.com/HarishSingaravelan/Streaming-with-Airflow-Kafka', text: 'GitHub Link' }]
+                },
+                {
+                    id: 'retail-analytics',
+                    title: 'ETL Pipeline for Retail Analytics',
+                    category: 'Data Engineering',
+                    tech: 'Apache Spark, Apache Airflow, MongoDB, MySQL',
+                    description: [
+                        '<strong>ETL & Data Integration:</strong> Designed and implemented an ETL pipeline for large-scale retail transactions...',
+                        '<strong>Batch Processing & Optimization:</strong> Developed a Spark-based workflow to optimize inventory tracking...',
+                        '<strong>Workflow Automation:</strong> Automated daily data processing tasks using Apache Airflow.'
+                    ],
+                    image: 'src/retail analytics.png',
+                    links: [{ icon: 'github', url: 'https://github.com/HarishSingaravelan/Retail-Analytics-ETL', text: 'GitHub Link' }]
+                },
+                {
+                    id: 'agricultural-analysis',
+                    title: 'Global Agricultural Production Analysis & Visualization',
+                    category: 'Data Analytics',
+                    tech: 'Tableau',
+                    description: [
+                        '<strong>Data Visualization:</strong> Designed an interactive Tableau dashboard to analyze global agricultural production...',
+                        '<strong>Data Integration & Transformation:</strong> Processed and normalized agricultural production data from multiple sources...',
+                        '<strong>Interactive Filtering & Insights:</strong> Implemented dynamic filters for farm produce and countries to gain granular insights.'
+                    ],
+                    image: 'src/agriculture.png',
+                    links: [{ icon: 'link', url: 'https://public.tableau.com/app/profile/harish.singaravelan/viz/Book1_17436107066220/Dashboard1', text: 'Project Link' }]
+                },
+                {
+                    id: 'loan-analysis',
+                    title: 'Loan Approval Analysis using SQL',
+                    category: 'Data Analytics',
+                    tech: 'SQL',
+                    description: [
+                        '<strong>Data Exploration:</strong> Performed data exploration using SQL queries to examine loan data structure...',
+                        '<strong>Statistical Analysis:</strong> Analyzed loan approval rates based on key factors like credit history and marital status.',
+                        '<strong>Financial Metrics:</strong> Calculated key financial metrics, including average loan amount and loan amount frequency.'
+                    ],
+                    image: 'src/loan.png',
+                    links: [{ icon: 'github', url: 'https://github.com/HarishSingaravelan/Loan-Approval-Analysis-using-SQL', text: 'GitHub Link' }]
+                },
+                {
+                    id: 'covid-eda',
+                    title: 'COVID-19 EDA using SQL',
+                    category: 'Data Analytics',
+                    tech: 'SQL',
+                    description: [
+                        '<strong>Data Exploration:</strong> Explored COVID-19 data to analyze total cases, total deaths, and population by location and date.',
+                        '<strong>Death & Infection Rates:</strong> Calculated the percentage of total deaths per total cases and the percentage of infected people...',
+                        '<strong>Global Analysis:</strong> Analyzed death counts and infection rates by country and continent...'
+                    ],
+                    image: 'src/covid.png',
+                    links: [{ icon: 'github', url: 'https://github.com/HarishSingaravelan/COVID-EDA-using-SQL', text: 'GitHub Link' }]
+                }
+            ];
+
             const projectButtons = document.querySelectorAll('.project-btn');
             const projectSections = document.querySelectorAll('.project-section');
 
-            // Function to show the selected project section
+            // Function to create and return a project card HTML string
+            function createProjectCard(project) {
+                const descriptionList = project.description.map(item => `<li>${item}</li>`).join('');
+                const linksList = project.links.map(link => `
+                    <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:text-accent-blue-dark transition-colors duration-300 flex items-center space-x-2">
+                        <i class="icon" data-lucide="${link.icon}"></i>
+                        <span>${link.text}</span>
+                    </a>
+                `).join('');
+
+                return `
+                    <div class="card p-6 hover:border-accent-blue-dark">
+                        <div class="project-image-container mb-4">
+                            <img src="${project.image}" alt="${project.title}" class="w-full rounded-lg" />
+                        </div>
+                        <h4 class="text-xl font-semibold text-white mb-2">${project.title}</h4>
+                        <p class="text-sm font-light text-slate-400 mb-4">${project.tech}</p>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2 text-sm mb-4">
+                            ${descriptionList}
+                        </ul>
+                        ${linksList}
+                    </div>
+                `;
+            }
+
+            // Function to render projects into a specific container
+            function renderProjects(projects, targetId) {
+                const container = document.getElementById(targetId);
+                container.innerHTML = ''; // Clear previous content
+                projects.forEach(project => {
+                    const cardHtml = createProjectCard(project);
+                    container.innerHTML += cardHtml; // Append new card
+                });
+                lucide.createIcons(); // Re-initialize icons after adding new HTML
+            }
+
+            // Function to handle showing the selected project section
             function showSection(targetId) {
                 projectSections.forEach(section => {
                     section.classList.add('hidden');
@@ -555,27 +466,39 @@
                 document.getElementById(targetId).classList.remove('hidden');
 
                 projectButtons.forEach(btn => {
-                    btn.classList.remove('active-btn', 'text-white', 'bg-gray-700');
-                    btn.classList.add('text-gray-400', 'hover:text-white', 'hover:bg-gray-700');
+                    btn.classList.remove('active-btn');
+                    btn.classList.add('text-slate-400', 'hover:bg-slate-700');
                 });
                 const activeButton = document.querySelector(`.project-btn[data-target="${targetId}"]`);
                 if (activeButton) {
-                    activeButton.classList.add('active-btn', 'text-white', 'bg-gray-700');
-                    activeButton.classList.remove('text-gray-400', 'hover:text-white', 'hover:bg-gray-700');
+                    activeButton.classList.add('active-btn');
+                    activeButton.classList.remove('text-slate-400', 'hover:bg-slate-700');
                 }
             }
 
+            // Handle button clicks
             projectButtons.forEach(button => {
                 button.addEventListener('click', (e) => {
                     const targetId = e.target.getAttribute('data-target');
                     showSection(targetId);
+
+                    if (targetId === 'all-projects') {
+                        renderProjects(projectsData, 'all-projects');
+                    } else {
+                        const filteredProjects = projectsData.filter(project => {
+                            // Convert category name to match the target ID format (e.g., "Data Science" -> "data-science")
+                            const categorySlug = project.category.replace(/\s+/g, '-').toLowerCase();
+                            return targetId.startsWith(categorySlug);
+                        });
+                        renderProjects(filteredProjects, targetId);
+                    }
                 });
             });
 
-            // Set the "All" section as default on page load
-            showSection('all-projects');
+            // Initial render on page load
+            renderProjects(projectsData, 'all-projects');
 
-            // About Me toggle functionality
+            // About Me toggle functionality and Intersection Observer
             const toggleButton = document.getElementById('toggle-about');
             const fullText = document.getElementById('about-me-full');
 
@@ -588,20 +511,19 @@
                     toggleButton.textContent = 'Show Less';
                 }
             });
-        });
-        
-        // Intersection Observer for scroll-triggered animations
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
 
-        document.querySelectorAll('.animate-on-scroll').forEach(section => {
-            observer.observe(section);
+            document.querySelectorAll('.animate-on-scroll').forEach(section => {
+                observer.observe(section);
+            });
         });
     </script>
 </body>
